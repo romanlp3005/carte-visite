@@ -29,8 +29,8 @@
         /* Dégradé personnalisé avec une courbe en bas */
         .header-bg {
             background: linear-gradient(135deg, var(--remax-blue) 0%, #002d7a 100%);
-            border-bottom-left-radius: 40% 20%;
-            border-bottom-right-radius: 40% 20%;
+            border-bottom-left-radius: 45% 25%;
+            border-bottom-right-radius: 45% 25%;
         }
 
         .action-btn {
@@ -107,27 +107,28 @@
 <body class="min-h-screen flex items-center justify-center p-4">
 
     <!-- Conteneur Principal -->
-    <main class="card-container w-full max-w-sm rounded-[2rem] overflow-hidden shadow-2xl relative animate-fade-in border border-white/50 ring-1 ring-black/5">
+    <main class="card-container w-full max-w-sm rounded-[2.5rem] overflow-hidden shadow-2xl relative animate-fade-in border border-white/50 ring-1 ring-black/5">
         
         <!-- En-tête / Bannière Courbée -->
-        <div class="relative h-64 header-bg flex flex-col items-center pt-8">
+        <!-- J'ai augmenté la hauteur (h-80) pour créer de l'espace entre le logo et la photo -->
+        <div class="relative h-80 header-bg flex flex-col items-center pt-8">
             <!-- Décoration d'arrière-plan -->
             <div class="absolute top-0 right-0 w-40 h-40 bg-white opacity-5 rounded-bl-full pointer-events-none"></div>
             <div class="absolute top-10 left-10 w-20 h-20 bg-blue-400 opacity-10 rounded-full blur-2xl pointer-events-none"></div>
 
-            <!-- LOGO RE/MAX - EN GROS SANS FOND -->
-            <div class="z-20 mb-6 animate-fade-in w-full px-8 flex justify-center" style="animation-delay: 0.1s;">
-                 <!-- Suppression des classes bg-white, shadow, padding pour enlever le fond -->
-                 <div class="flex items-center justify-center transform hover:scale-105 transition-transform duration-300 w-full max-w-[280px]">
+            <!-- LOGO RE/MAX - EN HAUT AVEC COULEURS D'ORIGINE -->
+            <div class="z-20 w-full px-6 flex justify-center items-start animate-fade-in" style="animation-delay: 0.1s;">
+                 <!-- Conteneur blanc arrondi pour faire ressortir les couleurs du logo sur le fond bleu -->
+                 <div class="bg-white/95 backdrop-blur-sm p-3 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300 w-full max-w-[240px]">
+                    <!-- Suppression du filtre invert pour garder les couleurs originales -->
                     <img src="logo_remax_transparent.png" 
                          alt="Logo RE/MAX" 
-                         class="w-full h-auto object-contain drop-shadow-xl filter brightness-0 invert"> 
-                         <!-- Ajout de brightness-0 invert pour le passer en blanc si le logo original est coloré et peu visible sur fond sombre, 
-                              OU supprimez 'filter brightness-0 invert' si vous préférez le logo original coloré avec un contour blanc -->
+                         class="w-full h-auto object-contain"> 
                  </div>
             </div>
 
             <!-- Photo de Profil -->
+            <!-- Positionnée en absolu en bas, avec une marge négative pour chevaucher la courbe (mais pas le logo) -->
             <div class="absolute -bottom-16 z-10 p-1.5 rounded-full bg-white/30 backdrop-blur-sm">
                 <div class="w-32 h-32 rounded-full border-[5px] border-white shadow-xl bg-gray-100 overflow-hidden relative group">
                     <!-- Image -->
