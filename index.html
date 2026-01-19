@@ -71,6 +71,37 @@
         .decoration-line {
             background: linear-gradient(to right, var(--remax-blue), var(--remax-red));
         }
+
+        /* Styles pour la modale QR Code */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            margin: auto;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
@@ -84,12 +115,15 @@
             <div class="absolute top-0 right-0 w-40 h-40 bg-white opacity-5 rounded-bl-full pointer-events-none"></div>
             <div class="absolute top-10 left-10 w-20 h-20 bg-blue-400 opacity-10 rounded-full blur-2xl pointer-events-none"></div>
 
-            <!-- LOGO RE/MAX - EN GROS -->
+            <!-- LOGO RE/MAX - EN GROS SANS FOND -->
             <div class="z-20 mb-6 animate-fade-in w-full px-8 flex justify-center" style="animation-delay: 0.1s;">
-                 <div class="bg-white/95 px-8 py-4 rounded-2xl shadow-xl flex items-center justify-center transform hover:scale-105 transition-transform duration-300 w-full max-w-[280px]">
+                 <!-- Suppression des classes bg-white, shadow, padding pour enlever le fond -->
+                 <div class="flex items-center justify-center transform hover:scale-105 transition-transform duration-300 w-full max-w-[280px]">
                     <img src="logo_remax_transparent.png" 
                          alt="Logo RE/MAX" 
-                         class="w-full h-auto object-contain">
+                         class="w-full h-auto object-contain drop-shadow-xl filter brightness-0 invert"> 
+                         <!-- Ajout de brightness-0 invert pour le passer en blanc si le logo original est coloré et peu visible sur fond sombre, 
+                              OU supprimez 'filter brightness-0 invert' si vous préférez le logo original coloré avec un contour blanc -->
                  </div>
             </div>
 
@@ -104,7 +138,7 @@
             </div>
         </div>
 
-        <!-- Informations Principales (Espace augmenté pour la photo) -->
+        <!-- Informations Principales -->
         <div class="px-6 pt-20 pb-8 text-center relative z-0">
             <h1 class="text-2xl font-bold mb-1 text-gray-900 leading-tight">Olena PAMPUKHA</h1>
             <div class="inline-block px-3 py-1 rounded-full bg-red-50 mb-3">
@@ -141,7 +175,7 @@
                 </a>
 
                 <!-- Site -->
-                <a href="https://www.acces-immobilier.com/fr" target="_blank" class="flex flex-col items-center gap-2 group">
+                <a href="https://www.acces-immobilier.com" target="_blank" class="flex flex-col items-center gap-2 group">
                     <div class="action-btn w-12 h-12 rounded-2xl flex items-center justify-center text-lg shadow-sm">
                         <i class="fas fa-home"></i>
                     </div>
@@ -172,12 +206,23 @@
                 </a>
             </div>
 
-            <!-- Bouton Sauvegarder Contact -->
-            <button onclick="downloadVCard()" class="w-full py-4 rounded-xl bg-gradient-to-r from-[#DC1C2E] to-[#b91524] text-white font-bold text-lg shadow-lg hover:shadow-red-500/30 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-3 mb-4 group relative overflow-hidden">
-                <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                <i class="fas fa-user-plus text-lg"></i>
-                <span class="relative">Enregistrer le contact</span>
-            </button>
+            <!-- Groupe de Boutons Bas de page -->
+            <div class="flex flex-col gap-3 mb-4">
+                <!-- Bouton Sauvegarder Contact -->
+                <button onclick="downloadVCard()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#DC1C2E] to-[#b91524] text-white font-bold text-lg shadow-lg hover:shadow-red-500/30 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-3 group relative overflow-hidden">
+                    <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                    <i class="fas fa-user-plus text-lg"></i>
+                    <span class="relative">Enregistrer le contact</span>
+                </button>
+
+                <!-- Bouton QR Code -->
+                <button onclick="toggleQRCode()" class="w-full py-3.5 rounded-xl bg-white text-[#1f2937] font-bold text-lg shadow-md border border-gray-200 hover:bg-gray-50 hover:text-[#003DA5] transition-colors flex items-center justify-center gap-3 group">
+                    <i class="fas fa-qrcode text-xl group-hover:scale-110 transition-transform"></i>
+                    <span>Afficher le QR Code</span>
+                </button>
+            </div>
+            
+            <p class="text-[10px] text-gray-400 italic">olena-pampukha.digitagpro.fr</p>
         </div>
 
         <!-- Footer -->
@@ -185,6 +230,31 @@
             <p class="text-[10px] font-medium text-gray-400">© 2024 Olena PAMPUKHA - RE/MAX</p>
         </div>
     </main>
+
+    <!-- Modal QR Code -->
+    <div id="qrModal" class="modal flex items-center justify-center p-4" onclick="toggleQRCode()">
+        <div class="modal-content bg-white p-6 rounded-3xl text-center shadow-2xl max-w-xs w-full relative" onclick="event.stopPropagation()">
+            <button onclick="toggleQRCode()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <h3 class="text-xl font-bold text-[#003DA5] mb-2">Scannez-moi</h3>
+            <p class="text-xs text-gray-500 mb-6">Pour accéder directement au site</p>
+            
+            <div class="bg-gray-100 p-4 rounded-xl inline-block mb-4">
+                <!-- QR Code généré via API pointant vers le domaine demandé -->
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://olena-pampukha.digitagpro.fr&color=003DA5" 
+                     alt="QR Code" 
+                     class="w-48 h-48 mix-blend-multiply">
+            </div>
+            
+            <p class="text-xs font-mono text-gray-400 break-all">olena-pampukha.digitagpro.fr</p>
+            
+            <button onclick="toggleQRCode()" class="mt-6 w-full py-3 rounded-xl bg-gray-100 text-gray-700 font-semibold hover:bg-gray-200 transition-colors">
+                Fermer
+            </button>
+        </div>
+    </div>
 
     <script>
         function downloadVCard() {
@@ -195,7 +265,7 @@
                 title: "Conseiller immobilier (Ei)",
                 phone: "+33782343103",
                 email: "olena.pampukha@remax.fr",
-                website: "https://www.remax.fr"
+                website: "https://olena-pampukha.digitagpro.fr"
             };
 
             const vCardData = `BEGIN:VCARD
@@ -218,6 +288,23 @@ END:VCARD`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+        }
+
+        // Fonction pour afficher/masquer le QR Code
+        function toggleQRCode() {
+            const modal = document.getElementById('qrModal');
+            if (modal.classList.contains('show')) {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 300); // Wait for transition
+            } else {
+                modal.style.display = 'flex';
+                // Petit délai pour permettre la transition d'opacité
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 10);
+            }
         }
     </script>
 </body>
