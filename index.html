@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte de Visite - Olena PAMPUKHA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #e5e7eb; /* Fond gris neutre */
+        }
+        
+        /* Charte Graphique RE/MAX */
+        :root {
+            --remax-blue: #003DA5;
+            --remax-red: #DC1C2E;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-light: #6b7280;
+        }
+
+        .card-container {
+            background: var(--card-bg);
+            color: var(--text-main);
+        }
+
+        /* Dégradé personnalisé RE/MAX */
+        .header-bg {
+            background: linear-gradient(135deg, var(--remax-blue) 60%, #002d7a 100%);
+        }
+
+        .action-btn {
+            transition: all 0.3s ease;
+            background-color: #f3f4f6;
+            color: var(--remax-blue);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-3px);
+            background-color: var(--remax-blue);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 61, 165, 0.3);
+        }
+
+        .info-item {
+            transition: transform 0.2s ease;
+        }
+        .info-item:hover {
+            transform: translateX(5px);
+        }
+        
+        /* Animation d'apparition */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        /* Ballon décoratif (subtil rappel du logo) */
+        .decoration-line {
+            background: linear-gradient(to right, var(--remax-blue), var(--remax-red));
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- Conteneur Principal -->
+    <main class="card-container w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl relative animate-fade-in border border-gray-100">
+        
+        <!-- En-tête / Bannière -->
+        <div class="relative h-44 header-bg flex items-center justify-center">
+            <!-- Formes décoratives abstraites -->
+            <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-bl-full"></div>
+            <div class="absolute bottom-0 left-0 w-24 h-24 bg-red-600 opacity-20 rounded-tr-full blur-xl"></div>
+
+            <!-- LOGO RE/MAX AJOUTÉ ICI -->
+            <div class="absolute top-5 w-full flex justify-center z-20">
+                 <div class="bg-white/95 px-5 py-2 rounded-full shadow-md">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Remax_logo.svg/320px-Remax_logo.svg.png" 
+                         alt="Logo RE/MAX" 
+                         class="h-6 object-contain">
+                 </div>
+            </div>
+
+            <!-- Photo de Profil -->
+            <div class="relative z-10 flex flex-col items-center mt-12">
+                <div class="w-28 h-28 rounded-full border-4 border-white shadow-lg bg-white overflow-hidden">
+                    <!-- Placeholder image générique femme professionnelle -->
+                    <img src="https://ui-avatars.com/api/?name=Olena+Pampukha&background=random&size=256" 
+                         alt="Olena PAMPUKHA" 
+                         class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+
+        <!-- Informations Principales -->
+        <div class="px-6 pt-10 pb-8 text-center relative z-10">
+            <h1 class="text-2xl font-bold mb-1 tracking-wide text-gray-900">Olena PAMPUKHA</h1>
+            <p class="text-[#DC1C2E] font-semibold text-sm uppercase tracking-wider mb-2">Conseiller immobilier (Ei)</p>
+            <p class="text-xs text-gray-400 mb-6">RE/MAX</p>
+            
+            <!-- Ligne séparatrice Bleu/Rouge -->
+            <div class="w-16 h-1 decoration-line mx-auto rounded-full mb-8"></div>
+
+            <!-- Grille de Boutons d'Action (Ronds) -->
+            <div class="grid grid-cols-4 gap-4 mb-8">
+                <!-- Téléphone -->
+                <a href="tel:+33782343103" class="flex flex-col items-center gap-2 group">
+                    <div class="action-btn w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-sm">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <span class="text-[10px] font-semibold text-gray-500 uppercase">Appeler</span>
+                </a>
+
+                <!-- Email -->
+                <a href="mailto:olena.pampukha@remax.fr" class="flex flex-col items-center gap-2 group">
+                    <div class="action-btn w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-sm">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <span class="text-[10px] font-semibold text-gray-500 uppercase">Email</span>
+                </a>
+
+                <!-- WhatsApp (Optionnel mais utile pro) -->
+                <a href="https://wa.me/33782343103" target="_blank" class="flex flex-col items-center gap-2 group">
+                    <div class="action-btn w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-sm">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <span class="text-[10px] font-semibold text-gray-500 uppercase">Message</span>
+                </a>
+
+                <!-- Site / Agence -->
+                <a href="https://www.remax.fr" target="_blank" class="flex flex-col items-center gap-2 group">
+                    <div class="action-btn w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-sm">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <span class="text-[10px] font-semibold text-gray-500 uppercase">Site</span>
+                </a>
+            </div>
+
+            <!-- Liste détaillée des informations -->
+            <div class="space-y-3 text-left mb-8">
+                <div class="info-item flex items-center gap-4 p-3 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-8 h-8 rounded-full bg-[#003DA5] flex items-center justify-center text-white text-sm">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-gray-400 uppercase font-bold">Mobile</p>
+                        <a href="tel:+33782343103" class="font-medium text-sm text-gray-800 hover:text-[#DC1C2E]">07 82 34 31 03</a>
+                    </div>
+                </div>
+
+                <div class="info-item flex items-center gap-4 p-3 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-8 h-8 rounded-full bg-[#003DA5] flex items-center justify-center text-white text-sm">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-gray-400 uppercase font-bold">Email</p>
+                        <a href="mailto:olena.pampukha@remax.fr" class="font-medium text-sm text-gray-800 hover:text-[#DC1C2E] break-all">olena.pampukha@remax.fr</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bouton Sauvegarder Contact -->
+            <button onclick="downloadVCard()" class="w-full py-4 rounded-xl bg-[#DC1C2E] text-white font-bold text-lg shadow-lg hover:bg-[#b01625] transition-colors flex items-center justify-center gap-2 mb-4 group">
+                <i class="fas fa-user-plus group-hover:scale-110 transition-transform"></i>
+                Enregistrer le contact
+            </button>
+            
+            <p class="text-xs text-gray-400 italic">Scannez ce code ou cliquez pour sauvegarder</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="bg-gray-100 py-3 text-center border-t border-gray-200">
+            <p class="text-[10px] text-gray-500">© 2024 Olena PAMPUKHA - RE/MAX</p>
+        </div>
+    </main>
+
+    <script>
+        function downloadVCard() {
+            const contact = {
+                firstName: "Olena",
+                lastName: "PAMPUKHA",
+                organization: "RE/MAX",
+                title: "Conseiller immobilier (Ei)",
+                phone: "+33782343103", // Format international
+                email: "olena.pampukha@remax.fr",
+                website: "https://www.remax.fr"
+            };
+
+            const vCardData = `BEGIN:VCARD
+VERSION:3.0
+N:${contact.lastName};${contact.firstName};;;
+FN:${contact.firstName} ${contact.lastName}
+ORG:${contact.organization}
+TITLE:${contact.title}
+TEL;TYPE=CELL:${contact.phone}
+EMAIL;TYPE=WORK,INTERNET:${contact.email}
+URL:${contact.website}
+END:VCARD`;
+
+            const blob = new Blob([vCardData], { type: 'text/vcard;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `${contact.firstName}_${contact.lastName}.vcf`);
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
