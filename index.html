@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carte de Visite - Olena PAMPUKHA</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #e5e7eb; /* Fond gris neutre */
+            background-color: #f3f4f6;
         }
         
         /* Charte Graphique RE/MAX */
@@ -19,7 +19,6 @@
             --remax-red: #DC1C2E;
             --card-bg: #ffffff;
             --text-main: #1f2937;
-            --text-light: #6b7280;
         }
 
         .card-container {
@@ -27,32 +26,39 @@
             color: var(--text-main);
         }
 
-        /* Dégradé personnalisé RE/MAX */
+        /* Dégradé personnalisé avec une courbe en bas */
         .header-bg {
-            background: linear-gradient(135deg, var(--remax-blue) 60%, #002d7a 100%);
+            background: linear-gradient(135deg, var(--remax-blue) 0%, #002d7a 100%);
+            border-bottom-left-radius: 40% 20%;
+            border-bottom-right-radius: 40% 20%;
         }
 
         .action-btn {
-            transition: all 0.3s ease;
-            background-color: #f3f4f6;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: #f8fafc;
             color: var(--remax-blue);
+            border: 1px solid #e2e8f0;
         }
         
+        .action-btn:active {
+            transform: scale(0.95);
+        }
+
         .action-btn:hover {
             transform: translateY(-3px);
             background-color: var(--remax-blue);
             color: white;
-            box-shadow: 0 4px 12px rgba(0, 61, 165, 0.3);
+            border-color: var(--remax-blue);
+            box-shadow: 0 10px 15px -3px rgba(0, 61, 165, 0.3);
         }
 
         .info-item {
             transition: transform 0.2s ease;
         }
         .info-item:hover {
-            transform: translateX(5px);
+            transform: translateX(4px);
         }
         
-        /* Animation d'apparition */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -62,7 +68,6 @@
             animation: fadeIn 0.8s ease-out forwards;
         }
         
-        /* Ballon décoratif (subtil rappel du logo) */
         .decoration-line {
             background: linear-gradient(to right, var(--remax-blue), var(--remax-red));
         }
@@ -71,113 +76,113 @@
 <body class="min-h-screen flex items-center justify-center p-4">
 
     <!-- Conteneur Principal -->
-    <main class="card-container w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl relative animate-fade-in border border-gray-100">
+    <main class="card-container w-full max-w-sm rounded-[2rem] overflow-hidden shadow-2xl relative animate-fade-in border border-white/50 ring-1 ring-black/5">
         
-        <!-- En-tête / Bannière -->
-        <div class="relative h-44 header-bg flex items-center justify-center">
-            <!-- Formes décoratives abstraites -->
-            <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-bl-full"></div>
-            <div class="absolute bottom-0 left-0 w-24 h-24 bg-red-600 opacity-20 rounded-tr-full blur-xl"></div>
+        <!-- En-tête / Bannière Courbée -->
+        <div class="relative h-48 header-bg flex flex-col items-center pt-6">
+            <!-- Décoration d'arrière-plan -->
+            <div class="absolute top-0 right-0 w-40 h-40 bg-white opacity-5 rounded-bl-full pointer-events-none"></div>
+            <div class="absolute top-10 left-10 w-20 h-20 bg-blue-400 opacity-10 rounded-full blur-2xl pointer-events-none"></div>
 
-            <!-- LOGO RE/MAX AJOUTÉ ICI -->
-            <div class="absolute top-5 w-full flex justify-center z-20">
-                 <div class="bg-white/95 px-5 py-2 rounded-full shadow-md">
-                    <img src="logo_remax_transparent.png" 
+            <!-- LOGO RE/MAX - Plus grand et élégant -->
+            <div class="z-20 mb-4 animate-fade-in" style="animation-delay: 0.1s;">
+                 <div class="bg-white px-6 py-2.5 rounded-full shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Remax_logo.svg/320px-Remax_logo.svg.png" 
                          alt="Logo RE/MAX" 
-                         class="h-6 object-contain">
+                         class="h-7 object-contain">
                  </div>
             </div>
 
-            <!-- Photo de Profil -->
-            <div class="relative z-10 flex flex-col items-center mt-12">
-                <div class="w-28 h-28 rounded-full border-4 border-white shadow-lg bg-white overflow-hidden">
-                    <!-- Placeholder image générique femme professionnelle -->
-                    <img src="Gemini_Generated_Image_1yr6jn1yr6jn1yr6.png" 
+            <!-- Photo de Profil - Agrandie et centrée sur la courbe -->
+            <div class="absolute -bottom-16 z-10 p-1.5 rounded-full bg-white/30 backdrop-blur-sm">
+                <div class="w-32 h-32 rounded-full border-[5px] border-white shadow-xl bg-gray-100 overflow-hidden relative group">
+                    <!-- Image -->
+                    <img src="https://ui-avatars.com/api/?name=Olena+Pampukha&background=random&size=256" 
                          alt="Olena PAMPUKHA" 
-                         class="w-full h-full object-cover">
+                         class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110">
                 </div>
             </div>
         </div>
 
-        <!-- Informations Principales -->
-        <div class="px-6 pt-10 pb-8 text-center relative z-10">
-            <h1 class="text-2xl font-bold mb-1 tracking-wide text-gray-900">Olena PAMPUKHA</h1>
-            <p class="text-[#DC1C2E] font-semibold text-sm uppercase tracking-wider mb-2">Conseiller immobilier (Ei)</p>
-            <p class="text-xs text-gray-400 mb-6">RE/MAX</p>
+        <!-- Informations Principales (Espace augmenté pour la photo) -->
+        <div class="px-6 pt-20 pb-8 text-center relative z-0">
+            <h1 class="text-2xl font-bold mb-1 text-gray-900 leading-tight">Olena PAMPUKHA</h1>
+            <div class="inline-block px-3 py-1 rounded-full bg-red-50 mb-3">
+                <p class="text-[#DC1C2E] font-bold text-xs uppercase tracking-wider">Conseiller immobilier (Ei)</p>
+            </div>
             
-            <!-- Ligne séparatrice Bleu/Rouge -->
-            <div class="w-16 h-1 decoration-line mx-auto rounded-full mb-8"></div>
+            <!-- Ligne séparatrice -->
+            <div class="w-12 h-1 decoration-line mx-auto rounded-full mb-8 opacity-80"></div>
 
-            <!-- Grille de Boutons d'Action (Ronds) -->
-            <div class="grid grid-cols-4 gap-4 mb-8">
+            <!-- Grille de Boutons d'Action -->
+            <div class="grid grid-cols-4 gap-3 mb-8 px-2">
                 <!-- Téléphone -->
                 <a href="tel:+33782343103" class="flex flex-col items-center gap-2 group">
-                    <div class="action-btn w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-sm">
+                    <div class="action-btn w-12 h-12 rounded-2xl flex items-center justify-center text-lg shadow-sm">
                         <i class="fas fa-phone-alt"></i>
                     </div>
-                    <span class="text-[10px] font-semibold text-gray-500 uppercase">Appeler</span>
+                    <span class="text-[10px] font-medium text-gray-500 uppercase tracking-tight group-hover:text-[#003DA5] transition-colors">Appeler</span>
                 </a>
 
                 <!-- Email -->
                 <a href="mailto:olena.pampukha@remax.fr" class="flex flex-col items-center gap-2 group">
-                    <div class="action-btn w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-sm">
+                    <div class="action-btn w-12 h-12 rounded-2xl flex items-center justify-center text-lg shadow-sm">
                         <i class="fas fa-envelope"></i>
                     </div>
-                    <span class="text-[10px] font-semibold text-gray-500 uppercase">Email</span>
+                    <span class="text-[10px] font-medium text-gray-500 uppercase tracking-tight group-hover:text-[#003DA5] transition-colors">Email</span>
                 </a>
 
-                <!-- WhatsApp (Optionnel mais utile pro) -->
+                <!-- WhatsApp -->
                 <a href="https://wa.me/33782343103" target="_blank" class="flex flex-col items-center gap-2 group">
-                    <div class="action-btn w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-sm">
+                    <div class="action-btn w-12 h-12 rounded-2xl flex items-center justify-center text-lg shadow-sm">
                         <i class="fab fa-whatsapp"></i>
                     </div>
-                    <span class="text-[10px] font-semibold text-gray-500 uppercase">Message</span>
+                    <span class="text-[10px] font-medium text-gray-500 uppercase tracking-tight group-hover:text-[#003DA5] transition-colors">Message</span>
                 </a>
 
-                <!-- Site / Agence -->
+                <!-- Site -->
                 <a href="https://www.remax.fr" target="_blank" class="flex flex-col items-center gap-2 group">
-                    <div class="action-btn w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-sm">
+                    <div class="action-btn w-12 h-12 rounded-2xl flex items-center justify-center text-lg shadow-sm">
                         <i class="fas fa-home"></i>
                     </div>
-                    <span class="text-[10px] font-semibold text-gray-500 uppercase">Site</span>
+                    <span class="text-[10px] font-medium text-gray-500 uppercase tracking-tight group-hover:text-[#003DA5] transition-colors">Site</span>
                 </a>
             </div>
 
             <!-- Liste détaillée des informations -->
             <div class="space-y-3 text-left mb-8">
-                <div class="info-item flex items-center gap-4 p-3 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-md transition-shadow">
-                    <div class="w-8 h-8 rounded-full bg-[#003DA5] flex items-center justify-center text-white text-sm">
-                        <i class="fas fa-mobile-alt"></i>
+                <a href="tel:+33782343103" class="info-item flex items-center gap-4 p-3.5 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-blue-100 transition-all group">
+                    <div class="w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center text-[#003DA5] group-hover:bg-[#003DA5] group-hover:text-white transition-colors">
+                        <i class="fas fa-mobile-alt text-sm"></i>
                     </div>
                     <div>
-                        <p class="text-[10px] text-gray-400 uppercase font-bold">Mobile</p>
-                        <a href="tel:+33782343103" class="font-medium text-sm text-gray-800 hover:text-[#DC1C2E]">07 82 34 31 03</a>
+                        <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wide">Mobile</p>
+                        <p class="font-semibold text-sm text-gray-800">07 82 34 31 03</p>
                     </div>
-                </div>
+                </a>
 
-                <div class="info-item flex items-center gap-4 p-3 rounded-xl bg-gray-50 border border-gray-100 hover:shadow-md transition-shadow">
-                    <div class="w-8 h-8 rounded-full bg-[#003DA5] flex items-center justify-center text-white text-sm">
-                        <i class="fas fa-paper-plane"></i>
+                <a href="mailto:olena.pampukha@remax.fr" class="info-item flex items-center gap-4 p-3.5 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-blue-100 transition-all group">
+                    <div class="w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center text-[#003DA5] group-hover:bg-[#003DA5] group-hover:text-white transition-colors">
+                        <i class="fas fa-paper-plane text-sm"></i>
                     </div>
                     <div>
-                        <p class="text-[10px] text-gray-400 uppercase font-bold">Email</p>
-                        <a href="mailto:olena.pampukha@remax.fr" class="font-medium text-sm text-gray-800 hover:text-[#DC1C2E] break-all">olena.pampukha@remax.fr</a>
+                        <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wide">Email</p>
+                        <p class="font-semibold text-sm text-gray-800 break-all">olena.pampukha@remax.fr</p>
                     </div>
-                </div>
+                </a>
             </div>
 
             <!-- Bouton Sauvegarder Contact -->
-            <button onclick="downloadVCard()" class="w-full py-4 rounded-xl bg-[#DC1C2E] text-white font-bold text-lg shadow-lg hover:bg-[#b01625] transition-colors flex items-center justify-center gap-2 mb-4 group">
-                <i class="fas fa-user-plus group-hover:scale-110 transition-transform"></i>
-                Enregistrer le contact
+            <button onclick="downloadVCard()" class="w-full py-4 rounded-xl bg-gradient-to-r from-[#DC1C2E] to-[#b91524] text-white font-bold text-lg shadow-lg hover:shadow-red-500/30 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-3 mb-4 group relative overflow-hidden">
+                <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <i class="fas fa-user-plus text-lg"></i>
+                <span class="relative">Enregistrer le contact</span>
             </button>
-            
-            <p class="text-xs text-gray-400 italic">Scannez ce code ou cliquez pour sauvegarder</p>
         </div>
 
         <!-- Footer -->
-        <div class="bg-gray-100 py-3 text-center border-t border-gray-200">
-            <p class="text-[10px] text-gray-500">© 2024 Olena PAMPUKHA - RE/MAX</p>
+        <div class="bg-gray-50 py-4 text-center border-t border-gray-100">
+            <p class="text-[10px] font-medium text-gray-400">© 2024 Olena PAMPUKHA - RE/MAX</p>
         </div>
     </main>
 
@@ -188,7 +193,7 @@
                 lastName: "PAMPUKHA",
                 organization: "RE/MAX",
                 title: "Conseiller immobilier (Ei)",
-                phone: "+33782343103", // Format international
+                phone: "+33782343103",
                 email: "olena.pampukha@remax.fr",
                 website: "https://www.remax.fr"
             };
